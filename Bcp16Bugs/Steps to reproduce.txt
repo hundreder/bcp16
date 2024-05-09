@@ -1,0 +1,38 @@
+1. start the server and open bcp on
+    http://localhost:5000/graphql/
+    
+2. create new document tab and paste following queries
+        
+        query foo($id: String!) {
+          foo(id: $id) {
+            id
+          }
+        }
+        
+        query problemFoos($ids: [String!]!) {
+          foos(input: { ids: $ids }) {
+            id
+          }
+        }
+        
+        query goodFoos($input: FoosInput!) {
+          foos(input: $input) {
+            id
+          }
+        }
+
+        variables
+        {
+          "id":"123",
+          "ids":["123","234"],
+          "input":{
+            "ids":["123","234"]
+          }
+        }
+
+
+3. Notice there is no Run buttons over the query names and no option to choose query to run. If you click main Run button you'll get a message
+        
+        The operation name can only be omitted if there is just one operation in a GraphQL document.
+     
+4. Problem is in how variables are defined in problemFoos query
